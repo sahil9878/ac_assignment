@@ -1,3 +1,6 @@
+import Image from "next/image";
+
+
 interface Product {
     id: number;
     title: string;
@@ -15,11 +18,12 @@ async function getProduct(id: string): Promise<Product> {
 }
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-    const product = await getProduct(params.id);
+    const { id } = await params
+    const product = await getProduct(id);
 
     return (
         <div style={{ display: 'flex', gap: '2rem' }}>
-            <img src={product.images[0]} alt={product.title} style={{ maxWidth: '300px' }} />
+            <Image src={product.images[0]} alt={product.title} width={400} height={400} />
             <div>
                 <h1>{product.title}</h1>
                 <p>{product.description}</p>

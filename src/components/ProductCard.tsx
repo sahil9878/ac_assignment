@@ -1,22 +1,34 @@
-'use client';
 
 import Link from 'next/link';
-import { useCart } from '../context/CartContext';
 import Image from 'next/image';
+import AddToCartButton from './AddToCartButton';
 
-export default function ProductCard({ product }: { product: any }) {
-    const { addToCart } = useCart();
+export interface IProduct {
+    id: number
+    thumbnail: string
+    title: string
+    price: number
+    rating?: number
+}
+
+export default function ProductCard({ product }: { product: IProduct }) {
 
     return (
         <Link href={`/products/${product.id}`}>
             <div style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '1rem' }}>
-
-                <Image src={product.thumbnail} alt={product.title} width={200} height={200} />
+                <div className='relative w-full h-60 '>
+                    <Image
+                        src={product.thumbnail}
+                        alt={product.title}
+                        fill
+                        style={{ objectFit: "contain" }}
+                    />
+                </div>
                 <h3>{product.title}</h3>
                 <p>${product.price}</p>
                 <p>⭐ {product.rating}</p>
-                <button onClick={(e) => { e.stopPropagation(); e.preventDefault(); addToCart(product) }}>Add to Cart</button>
+                <AddToCartButton product={product} />
             </div>
-        </Link>
+        </Link >
     );
 }

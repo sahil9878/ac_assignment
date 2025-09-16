@@ -7,7 +7,7 @@ import CartIcon from '@/icons/cart.svg'
 
 export default function Header() {
     const { cart } = useCart();
-    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <header style={{ display: 'flex', justifyContent: 'space-between', padding: '1rem', borderBottom: '1px solid #ddd' }}>

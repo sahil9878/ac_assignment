@@ -1,12 +1,13 @@
 'use client';
 
+import AddToCartButton from '@/components/AddToCartButton';
 import { useCart } from '../../context/CartContext';
 
 export default function CartPage() {
-    const { cart, removeFromCart } = useCart();
+    const { cart } = useCart();
 
-    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-    const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+    const totalPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
     return (
         <div>
@@ -15,10 +16,14 @@ export default function CartPage() {
             <ul>
                 {cart.map((item) => (
                     <li key={item.id} style={{ marginBottom: '1rem' }}>
-                        <span>{item.title}</span> - ${item.price} × {item.qty}
-                        <button style={{ marginLeft: '1rem' }} onClick={() => removeFromCart(item.id)}>
-                            Remove
-                        </button>
+                        <div className='flex items-center gap-10'>
+                            <span>{item.title}</span>  ${item.price} × {item.quantity}
+                            <span>
+
+
+                                <AddToCartButton product={item} />
+                            </span>
+                        </div>
                     </li>
                 ))}
             </ul>

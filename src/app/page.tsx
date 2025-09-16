@@ -1,4 +1,6 @@
-import ProductCard from '../components/ProductCard';
+import ProductCard, { IProduct } from '../components/ProductCard';
+
+
 
 async function getProducts() {
   const res = await fetch('https://dummyjson.com/products', { next: { revalidate: 60 } });
@@ -12,7 +14,7 @@ export default async function HomePage() {
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill,minmax(250px,1fr))', gap: '1rem' }}>
-      {products.map((p: any) => (
+      {products.map((p: IProduct) => (
         <ProductCard key={p.id} product={p} />
       ))}
     </div>
